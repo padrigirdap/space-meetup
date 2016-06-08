@@ -1,5 +1,6 @@
 require 'sinatra'
 require_relative 'config/application'
+require 'pry'
 
 helpers do
   def current_user
@@ -31,7 +32,18 @@ get '/sign_out' do
   redirect '/'
 end
 
+get '/meetups/:id' do
+
+ @meetup = Meetup.find(params[:id])
+ @name = @meetup.name
+ @location = @meetup.location
+ @description = @meetup.description
+ @creator = @meetup.creator.username
+
+ erb :'meetups/show'
+end
+
 get '/meetups' do
-  @meetups =
+  @meetups = Meetup.all
   erb :'meetups/index'
 end

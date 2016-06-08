@@ -17,15 +17,15 @@ ActiveRecord::Schema.define(version: 20160607182304) do
   enable_extension "plpgsql"
 
   create_table "meetups", force: :cascade do |t|
-    t.string "name",        null: false
-    t.string "description", null: false
-    t.string "location",    null: false
-    t.string "creator",     null: false
+    t.string  "name",        null: false
+    t.string  "description", null: false
+    t.string  "location",    null: false
+    t.integer "creator_id",  null: false
   end
 
   create_table "usermeetups", force: :cascade do |t|
-    t.integer "users_id",   null: false
-    t.integer "meetups_id", null: false
+    t.integer "user_id",   null: false
+    t.integer "meetup_id", null: false
   end
 
   create_table "users", force: :cascade do |t|

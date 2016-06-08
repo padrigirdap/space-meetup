@@ -4,3 +4,8 @@
 # Example:
 #
 #   Person.create(first_name: 'Eric', last_name: 'Kelly')
+
+# user = User.create(provider: "p", uid: "11", username: "user", email: "user@user.com", avatar_url: "test")
+# user2 = User.create(provider: "o", uid: "33", username: "user2", email: "user2@user.com", avatar_url: "test2")
+#
+# meetup = Meetup.create(name: "an awful party", description: "y", location: "la")

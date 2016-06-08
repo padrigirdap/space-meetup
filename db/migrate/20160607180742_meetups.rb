@@ -4,7 +4,7 @@ class Meetups < ActiveRecord::Migration
       t.string :name, null: false
       t.string :description, null: false
       t.string :location, null: false
-      t.string :creator, null: false
+      t.integer :creator_id, null: false
     end
   end
 end
