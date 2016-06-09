@@ -32,6 +32,12 @@ get '/sign_out' do
   redirect '/'
 end
 
+get '/meetups' do
+  @meetups = Meetup.all
+  erb :'meetups/index'
+end
+
+
 get '/meetups/:id' do
 
  @meetup = Meetup.find(params[:id])
@@ -43,7 +49,20 @@ get '/meetups/:id' do
  erb :'meetups/show'
 end
 
-get '/meetups' do
-  @meetups = Meetup.all
-  erb :'meetups/index'
+get '/meetups/new/create' do
+  erb :'meetups/new'
+end
+
+post '/meetups/new/create' do
+  @new_meetup = Meetup.new(name: params["name"], location: params["location"], description: params["description"], creator: current_user)
+  binding.pry
+  if @new_meetup.valid?
+    @meetup_path = @new_meetup.id
+    @new_meetup.save
+    flash[:notice] = "Meetup created successfully!"
+    redirect "/meetups/#{@meetup_path}"
+  else
+    flash[:notice] = @new_meetup.errors.full_messages
+    erb :'meetups/new'
+  end
 end

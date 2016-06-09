@@ -1,6 +1,9 @@
 class Usermeetup < ActiveRecord::Base
   belongs_to :meetups
   belongs_to :users
+
+  validates :meetups, presence: true
+  validates :users, presence: true
 end
 
 

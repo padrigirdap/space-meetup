@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature "User signs in" do
-  let(:user) do
+  let!(:user) do
     User.create(
       provider: "github",
       uid: "1",
@@ -11,7 +11,7 @@ feature "User signs in" do
     )
   end
 
-    let(:party1) do
+    let!(:party1) do
       Meetup.create(
         name: "happy time",
         location: "LA",
@@ -22,9 +22,12 @@ feature "User signs in" do
 
 
   scenario "view list of all available meetups" do
-    user
-    party1
+    visit '/meetups'
 
+    expect(page).to have_content("happy time")
+  end
+
+  scenario "view page of a single meetup and see info" do
     visit '/meetups'
     click_link('happy time')
 
@@ -32,6 +35,5 @@ feature "User signs in" do
     expect(page).to have_content("LA")
     expect(page).to have_content("jimmy's salami party")
     expect(page).to have_content(user.username)
-
   end
 end
